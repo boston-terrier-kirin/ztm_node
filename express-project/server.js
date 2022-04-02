@@ -1,32 +1,20 @@
 const express = require('express');
+const friendsController = require('./controllers/friends.controller');
 
 const app = express();
 
-const friends = [
-  {
-    id: 30,
-    name: 'Stephen Curry',
-  },
-  {
-    id: 11,
-    name: 'Klay Thompson',
-  },
-];
-
-app.get('/friends', (req, res) => {
-  res.json(friends);
+app.use((req, res, next) => {
+  const start = Date.now();
+  next();
+  const delta = Date.now() - start;
+  console.log(`${req.method} ${req.url} ${delta}ms`);
 });
 
-app.get('/friends/:id', (req, res) => {
-  const id = Number(req.params.id);
-  const friend = friends.filter((friend) => friend.id === id);
+app.use(express.json());
 
-  if (!friend || friend.length === 0) {
-    console.log('comming');
-    return res.status(404).json({ error: 'Friends does not found.' });
-  }
-  res.status(200).json(friend);
-});
+app.get('/friends', friendsController.getFriends);
+app.get('/friends/:id', friendsController.getFriend);
+app.post('/friends', friendsController.createFriends);
 
 const PORT = 3000;
 app.listen(PORT, () => {
