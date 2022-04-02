@@ -1,6 +1,6 @@
 const friends = require('../models/friends.model');
 
-function createFriends(req, res) {
+function postFriends(req, res) {
   if (!req.body.name) {
     return res.status(400).json({ error: 'Invalid request.' });
   }
@@ -11,11 +11,11 @@ function createFriends(req, res) {
   };
   friends.push(newFriend);
 
-  res.json(newFriend);
+  res.status(201).json(newFriend);
 }
 
 function getFriends(req, res) {
-  res.json(friends);
+  res.status(200).json(friends);
 }
 
 function getFriend(req, res) {
@@ -23,14 +23,14 @@ function getFriend(req, res) {
   const friend = friends.filter((friend) => friend.id === id);
 
   if (!friend || friend.length === 0) {
-    return res.status(404).json({ error: 'Friends does not found.' });
+    return res.status(404).json({ error: 'Friend does not found.' });
   }
 
   res.status(200).json(friend);
 }
 
 module.exports = {
-  createFriends,
+  postFriends,
   getFriend,
   getFriends,
 };
