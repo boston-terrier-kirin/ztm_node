@@ -13,6 +13,10 @@ function isHabitablePlanet(planet) {
 
 const results = [];
 
+/**
+ * Promiseにしないと、ロードが終わる前にexportされてしまう。
+ * Promiseにして、server.jsでawaitする。
+ */
 function loadPlanetsData() {
   return new Promise((resolve, reject) => {
     fs.createReadStream(
