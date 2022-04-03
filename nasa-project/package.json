@@ -6,8 +6,10 @@
   "scripts": {
     "start:server": "npm run watch --prefix server",
     "start:client": "npm start --prefix client",
-    "watch": "concurrently npm:start:*",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "concurrently npm:start:*",
+    "install:server": "npm install --prefix server",
+    "install:client": "npm install --prefix client",
+    "install": "concurrently npm:install:*"
   },
   "keywords": [],
   "author": "",
