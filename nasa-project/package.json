@@ -9,7 +9,6 @@
     "start": "concurrently npm:start:*",
     "install:server": "npm install --prefix server",
     "install:client": "npm install --prefix client",
-    "install": "concurrently npm:install:*",
     "deply": "npm run build --prefix client && npm run server --prefix start"
   },
   "keywords": [],
