@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "pm2:start": "cross-env ./node_modules/.bin/pm2 start server.js -i max",
-    "pm2:delete": "cross-env ./node_modules/.bin/pm2 delete",
+    "pm2:start": "cross-env ./node_modules/.bin/pm2 start server.js -l log.txt -i max",
+    "pm2:delete": "cross-env ./node_modules/.bin/pm2 delete server",
     "pm2:list": "cross-env ./node_modules/.bin/pm2 list",
+    "pm2:monit": "cross-env ./node_modules/.bin/pm2 monit",
     "pm2:logs": "cross-env ./node_modules/.bin/pm2 logs"
   },
   "keywords": [],
