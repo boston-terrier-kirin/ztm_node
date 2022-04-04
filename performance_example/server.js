@@ -4,6 +4,7 @@
  */
 const cluster = require('cluster');
 const express = require('express');
+const os = require('os');
 
 const app = express();
 
@@ -21,11 +22,11 @@ app.get('/timer', (req, res) => {
   res.send(`Ding ding ding!: ${process.pid}`);
 });
 
-console.log('Running server.js');
 if (cluster.isMaster) {
-  console.log('Master has been started...');
-  cluster.fork();
-  cluster.fork();
+  const num_worksers = os.cpus().length;
+  for (let i = 0; i < num_worksers; i++) {
+    cluster.fork();
+  }
 } else {
   console.log(`Worker process started...: ${process.pid}`);
   app.listen(3000);
